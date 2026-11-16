@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071b1f" />
+    <title>AI 病理鑑識檔案庫｜LLM Wiki</title>
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/data.js" defer></script>
+    <script src="assets/js/wiki.js" defer></script>
+  </head>
+  <body class="wiki-page">
+    <header class="wiki-header">
+      <a class="brand" href="index.html"><span class="brand-seal">鑑</span><span><strong>AI 病理鑑識檔案庫</strong><small>LOCAL-FIRST LLM WIKI</small></span></a>
+      <nav><a href="index.html">教學簡報</a><a href="workflow.html">Loop／Graph</a></nav>
+    </header>
+    <main>
+      <section class="wiki-hero">
+        <div>
+          <p class="kicker">RAW → WIKI → QUERY / LINT</p>
+          <h1>證據不只被摘要，<br />還要能追溯。</h1>
+          <p>七個來源被 LLM 編譯成互相連結的概念頁，再由 Query 產生案件 WSI-095 的教學簡報。</p>
+        </div>
+        <dl class="wiki-stats">
+          <div><dt>RAW SOURCES</dt><dd>07</dd></div>
+          <div><dt>CONCEPT PAGES</dt><dd>07</dd></div>
+          <div><dt>EVIDENCE CARDS</dt><dd>10</dd></div>
+          <div><dt>LINT OPEN</dt><dd>00</dd></div>
+        </dl>
+      </section>
+
+      <section class="wiki-graph-section" aria-labelledby="wiki-graph-title">
+        <div class="section-title"><div><p class="kicker">KNOWLEDGE GRAPH</p><h2 id="wiki-graph-title">概念如何彼此支援</h2></div><p>點擊節點可篩選相關證物。</p></div>
+        <div class="wiki-graph" id="wiki-graph">
+          <button class="graph-core" type="button" data-topic="all">WSI-095<br /><small>能否上線？</small></button>
+          <button class="graph-orbit n1" type="button" data-topic="wsi">全視野切片</button>
+          <button class="graph-orbit n2" type="button" data-topic="tiling">分塊與弱監督</button>
+          <button class="graph-orbit n3" type="button" data-topic="split">資料切分</button>
+          <button class="graph-orbit n4" type="button" data-topic="metrics">指標</button>
+          <button class="graph-orbit n5" type="button" data-topic="bias">跨院偏差</button>
+          <button class="graph-orbit n6" type="button" data-topic="human">人機協作</button>
+          <button class="graph-orbit n7" type="button" data-topic="ethics">倫理部署</button>
+          <svg viewBox="0 0 800 480" aria-hidden="true"><g><line x1="400" y1="240" x2="400" y2="44"/><line x1="400" y1="240" x2="610" y2="104"/><line x1="400" y1="240" x2="690" y2="272"/><line x1="400" y1="240" x2="555" y2="420"/><line x1="400" y1="240" x2="245" y2="420"/><line x1="400" y1="240" x2="110" y2="272"/><line x1="400" y1="240" x2="190" y2="104"/></g></svg>
+        </div>
+      </section>
+
+      <section class="wiki-content" aria-labelledby="sources-title">
+        <aside class="wiki-sidebar">
+          <p class="kicker">FILTER ARCHIVE</p>
+          <div class="filter-list" role="group" aria-label="篩選 Wiki 卡片">
+            <button class="is-selected" type="button" data-filter="all">全部</button>
+            <button type="button" data-filter="source">Raw Sources</button>
+            <button type="button" data-filter="concept">Concepts</button>
+            <button type="button" data-filter="record">Run Records</button>
+          </div>
+          <a class="repo-note" href="https://github.com/JohnnyFu987/ai-pathology-forensics-wiki" target="_blank" rel="noreferrer">所有 Markdown 原始檔已與網站一起公開於 GitHub。</a>
+        </aside>
+        <div class="wiki-cards-area">
+          <div class="section-title"><div><p class="kicker">BROWSE ARCHIVE</p><h2 id="sources-title">來源、概念與紀錄</h2></div><span id="result-count">17 筆</span></div>
+          <div id="wiki-card-grid" class="wiki-card-grid"></div>
+        </div>
+      </section>
+
+      <section class="records-section" id="records">
+        <div class="section-title"><div><p class="kicker">RUN 01 · 2026-11-17</p><h2>實際執行與修正</h2></div></div>
+        <div class="record-timeline">
+          <article><span>01</span><h3>Ingest 7 筆來源</h3><p>產生 7 個概念頁與 10 張證物卡。</p></article>
+          <article class="issue"><span>02</span><h3>Lint 找到 3 個問題</h3><p>指標誤標、語氣過度概括、孤立連結。</p></article>
+          <article><span>03</span><h3>把檢查往前移</h3><p>數字先保存指標、資料集與情境，才可進 Wiki。</p></article>
+          <article class="pass"><span>04</span><h3>重新 Query</h3><p>0 個 unsupported claims，0 個 broken links。</p></article>
+        </div>
+      </section>
+    </main>
+    <footer class="document-footer">LLM 編譯的教學知識庫 · 不提供醫療診斷</footer>
+  </body>
+</html>
+

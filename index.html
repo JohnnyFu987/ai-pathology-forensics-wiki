@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="互動式教學 HTML 簡報：調查一個宣稱準確率 95% 的虛構病理 AI 是否可以直接上線。" />
+    <meta name="theme-color" content="#071b1f" />
+    <title>案件 WSI-095｜AI 病理鑑識局</title>
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/data.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+  </head>
+  <body class="deck-page">
+    <a class="skip-link" href="#slide-stage">跳到簡報內容</a>
+
+    <header class="deck-header">
+      <a class="brand" href="#slide-1" aria-label="返回第一張投影片">
+        <span class="brand-seal" aria-hidden="true">鑑</span>
+        <span><strong>AI 病理鑑識局</strong><small>PATHOLOGY EVIDENCE UNIT</small></span>
+      </a>
+      <div class="case-status" aria-label="案件狀態">
+        <span>CASE</span>
+        <strong>WSI-095</strong>
+        <span class="status-dot">審查中</span>
+      </div>
+      <nav class="deck-tools" aria-label="簡報工具">
+        <a href="wiki.html" title="開啟 LLM Wiki">Wiki</a>
+        <button id="source-button" type="button" title="查看本頁來源">證物</button>
+        <button id="fullscreen-button" type="button" title="進入全螢幕">全螢幕</button>
+      </nav>
+    </header>
+
+    <main id="slide-stage" class="slide-stage" tabindex="-1">
+      <article class="slide slide-cover is-active" id="slide-1" data-slide="1" aria-labelledby="slide-1-title">
+        <div class="cover-grid">
+          <div class="cover-copy">
+            <p class="kicker">CONFIDENTIAL · TRAINING CASE</p>
+            <h1 id="slide-1-title">準確率 <em>95%</em> 的 AI，<br />可以直接上線嗎？</h1>
+            <p class="lead">你是今天的 AI 醫療審查員。桌上只有一個漂亮數字，請從七份研究與指引中找出缺少的證據。</p>
+            <button class="primary-action" type="button" data-next>接受案件 <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="case-folder" aria-label="案件摘要">
+            <div class="folder-tab">WSI-095</div>
+            <p class="stamp">待審</p>
+            <dl>
+              <div><dt>申請用途</dt><dd>病理影像 AI</dd></div>
+              <div><dt>宣稱表現</dt><dd>Accuracy 95%</dd></div>
+              <div><dt>外部驗證</dt><dd class="redacted">未提供</dd></div>
+              <div><dt>資料切分</dt><dd class="redacted">未提供</dd></div>
+            </dl>
+            <p class="fiction-note">案件與 95% 數字為虛構教學情境</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" id="slide-2" data-slide="2" aria-labelledby="slide-2-title">
+        <div class="slide-copy narrow-copy">
+          <p class="kicker">EVIDENCE 01 · THE SCENE</p>
+          <h2 id="slide-2-title">這不是一張普通照片，<br />而是一座像素城市。</h2>
+          <p>全視野切片（WSI）把整張玻片掃描成可縮放的高解析度影像。檔案可能很大，AI 通常需要選擇倍率與區域才能分析。</p>
+          <div class="takeaway"><span>鑑識問題</span><strong>模型看了整張切片，還是只看預先選好的區域？</strong></div>
+        </div>
+        <div class="slide-visual microscope-panel">
+          <div class="wsi-map" id="wsi-map" aria-label="抽象病理切片示意">
+            <span class="cell c1"></span><span class="cell c2"></span><span class="cell c3"></span>
+            <span class="cell c4"></span><span class="cell c5"></span><span class="cell c6"></span>
+            <span class="scan-target" aria-hidden="true"></span>
+          </div>
+          <label class="zoom-control" for="zoom-range">
+            <span>模擬倍率</span>
+            <input id="zoom-range" type="range" min="1" max="4" value="1" />
+            <output id="zoom-output" for="zoom-range">5× 全景</output>
+          </label>
+          <p class="visual-caption">拖動倍率，看看視野如何從整體縮小成局部。</p>
+        </div>
+      </article>
+
+      <article class="slide" id="slide-3" data-slide="3" aria-labelledby="slide-3-title">
+        <div class="slide-copy narrow-copy">
+          <p class="kicker">EVIDENCE 02 · TILING</p>
+          <h2 id="slide-3-title">AI 的第一步：<br />把城市切成小街區。</h2>
+          <p>大型切片會被切成許多 patch。模型可能只從少數高分區塊學習，因此倍率、大小與取樣方式都是模型的一部分。</p>
+          <p class="instruction">點擊右側格子，找出藏在切片中的三個可疑區域。</p>
+          <p id="tile-status" class="status-message" aria-live="polite">已找到 0 / 3 個可疑區域</p>
+        </div>
+        <div class="slide-visual tile-evidence">
+          <div id="tile-grid" class="tile-grid" aria-label="16 個切片區塊"></div>
+          <div class="evidence-tag">PATCH SET · 4 × 4</div>
+        </div>
+      </article>
+
+      <article class="slide" id="slide-4" data-slide="4" aria-labelledby="slide-4-title">
+        <div class="slide-copy narrow-copy">
+          <p class="kicker">EVIDENCE 03 · DATA LEAK</p>
+          <h2 id="slide-4-title">考卷真的沒有<br />出現在課本裡嗎？</h2>
+          <p>同一位病人的切片不能同時出現在訓練與測試資料。否則模型可能記住病人或製作流程，而不是學會疾病特徵。</p>
+          <button id="audit-split" class="secondary-action" type="button">執行病人層級稽核</button>
+          <p id="split-status" class="status-message warning" aria-live="polite">尚未檢查：測試集可能不是獨立考卷</p>
+        </div>
+        <div class="slide-visual split-board" id="split-board">
+          <section>
+            <h3>TRAINING <span>課本</span></h3>
+            <div class="patient-chip" data-patient="P014">P014 · slide A</div>
+            <div class="patient-chip">P022 · slide A</div>
+            <div class="patient-chip">P031 · slide A</div>
+          </section>
+          <section>
+            <h3>TEST <span>考卷</span></h3>
+            <div class="patient-chip duplicate" data-patient="P014">P014 · slide B</div>
+            <div class="patient-chip">P048 · slide A</div>
+            <div class="patient-chip">P052 · slide A</div>
+          </section>
+          <span class="leak-line" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="slide" id="slide-5" data-slide="5" aria-labelledby="slide-5-title">
+        <div class="slide-copy metric-copy">
+          <p class="kicker">EVIDENCE 04 · THE 95% TRAP</p>
+          <h2 id="slide-5-title">一樣的準確率，<br />可能藏著不同錯誤。</h2>
+          <p>假設 100 個案例中有 20 個真正陽性。調整漏診與誤報，觀察準確率、敏感度與特異度如何改變。</p>
+          <div class="metric-controls">
+            <label for="fn-range">漏診（FN）<input id="fn-range" type="range" min="0" max="8" value="5" /></label>
+            <label for="fp-range">誤報（FP）<input id="fp-range" type="range" min="0" max="20" value="0" /></label>
+          </div>
+        </div>
+        <div class="slide-visual metric-lab">
+          <div class="matrix" aria-label="互動混淆矩陣">
+            <div class="matrix-corner"></div><div class="matrix-head">預測＋</div><div class="matrix-head">預測－</div>
+            <div class="matrix-head">實際＋</div><div class="matrix-cell good"><span id="tp-value">15</span><small>TP 抓到</small></div><div class="matrix-cell bad"><span id="fn-value">5</span><small>FN 漏掉</small></div>
+            <div class="matrix-head">實際－</div><div class="matrix-cell warn"><span id="fp-value">0</span><small>FP 誤報</small></div><div class="matrix-cell good"><span id="tn-value">80</span><small>TN 排除</small></div>
+          </div>
+          <div class="metric-readout">
+            <div><span>Accuracy</span><strong id="accuracy-value">95%</strong></div>
+            <div><span>Sensitivity</span><strong id="sensitivity-value">75%</strong></div>
+            <div><span>Specificity</span><strong id="specificity-value">100%</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" id="slide-6" data-slide="6" aria-labelledby="slide-6-title">
+        <div class="slide-copy narrow-copy">
+          <p class="kicker">EVIDENCE 05 · HOSPITAL FINGERPRINTS</p>
+          <h2 id="slide-6-title">模型可能認出醫院，<br />卻沒有真正理解疾病。</h2>
+          <p>染色流程、掃描器與製片方式會留下站點特徵。研究顯示深度學習甚至能辨識切片來自哪個提交站點。</p>
+          <div class="takeaway"><span>鑑識問題</span><strong>模型依賴的是生物訊號，還是醫院指紋？</strong></div>
+        </div>
+        <div class="slide-visual site-lab">
+          <div class="site-tabs" role="group" aria-label="切換不同醫院的染色風格">
+            <button class="is-selected" type="button" data-site="a">醫院 A</button>
+            <button type="button" data-site="b">醫院 B</button>
+            <button type="button" data-site="c">醫院 C</button>
+          </div>
+          <div id="site-slide" class="site-slide site-a" aria-label="同一組抽象細胞在不同染色風格下的示意">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p id="site-caption" class="visual-caption">醫院 A：偏粉紫、對比中等（抽象示意）</p>
+        </div>
+      </article>
+
+      <article class="slide" id="slide-7" data-slide="7" aria-labelledby="slide-7-title">
+        <div class="slide-copy narrow-copy">
+          <p class="kicker">EVIDENCE 06 · EXTERNAL VALIDATION</p>
+          <h2 id="slide-7-title">換一批資料，<br />漂亮分數還站得住嗎？</h2>
+          <p>外部驗證不是把同一資料重新切一次，而是使用開發過程沒有接觸的來源，檢查模型是否依然有效。</p>
+          <p class="research-context">真實研究案例：CAMELYON16 訓練的全監督模型，在該挑戰測試集 AUC 為 0.930；移到較大的 MSK 測試集後為 0.727。</p>
+          <p class="fine-print">這是特定研究中的 AUC，不是案件 WSI-095 的準確率。</p>
+        </div>
+        <div class="slide-visual validation-board">
+          <div class="score-card internal"><span>INTERNAL-LIKE</span><strong>0.930</strong><small>CAMELYON16 test · AUC</small></div>
+          <div class="transfer-arrow" aria-hidden="true">→</div>
+          <div class="score-card external"><span>EXTERNAL SOURCE</span><strong>0.727</strong><small>MSK test · AUC</small></div>
+          <div class="evidence-tape">CONTEXT REQUIRED</div>
+        </div>
+      </article>
+
+      <article class="slide" id="slide-8" data-slide="8" aria-labelledby="slide-8-title">
+        <div class="slide-copy narrow-copy">
+          <p class="kicker">EVIDENCE 07 · HUMAN IN THE LOOP</p>
+          <h2 id="slide-8-title">好的 AI 不是搶走放大鏡，<br />而是把線索放對位置。</h2>
+          <p>AI 可以協助標示可疑區域、排序病例或提供第二讀；病理醫師仍需整合其他染色、臨床資料與專業判斷。</p>
+          <p class="fine-print">協作效益必須在實際介面、使用者和工作流程中驗證。</p>
+        </div>
+        <div class="slide-visual workflow-chain" aria-label="人機協作流程">
+          <div><span>01</span><strong>AI 預先篩選</strong><small>標記與排序</small></div>
+          <i aria-hidden="true">→</i>
+          <div><span>02</span><strong>病理醫師複核</strong><small>整合完整證據</small></div>
+          <i aria-hidden="true">→</i>
+          <div><span>03</span><strong>持續監測</strong><small>追蹤錯誤與漂移</small></div>
+        </div>
+      </article>
+
+      <article class="slide slide-verdict" id="slide-9" data-slide="9" aria-labelledby="slide-9-title">
+        <div class="verdict-intro">
+          <p class="kicker">FINAL REVIEW · YOUR DECISION</p>
+          <h2 id="slide-9-title">七份證物到齊。<br />你的裁決是？</h2>
+          <p>目前案件只提供「準確率 95%」，缺少資料切分、錯誤分布、外部驗證、使用情境與監測計畫。</p>
+        </div>
+        <div class="verdict-options" role="group" aria-label="選擇案件裁決">
+          <button type="button" data-verdict="approve"><span>APPROVE</span><strong>准許上線</strong></button>
+          <button type="button" data-verdict="supplement"><span>REQUEST EVIDENCE</span><strong>要求補件</strong></button>
+          <button type="button" data-verdict="reject"><span>REJECT</span><strong>永久退件</strong></button>
+        </div>
+        <div id="verdict-result" class="verdict-result" aria-live="polite">請選擇一個裁決。</div>
+      </article>
+
+      <article class="slide slide-close" id="slide-10" data-slide="10" aria-labelledby="slide-10-title">
+        <div class="close-stamp" aria-hidden="true">補件</div>
+        <div class="close-copy">
+          <p class="kicker">CASE STATUS · EVIDENCE REQUIRED</p>
+          <h2 id="slide-10-title">單一分數是案件起點，<br />不是上線許可。</h2>
+          <ul class="closing-list">
+            <li><span>01</span>確認病人層級資料切分</li>
+            <li><span>02</span>檢查完整錯誤分布與使用閾值</li>
+            <li><span>03</span>完成跨院外部驗證</li>
+            <li><span>04</span>定義人機協作與上線後監測</li>
+          </ul>
+          <div class="close-actions">
+            <a class="primary-action" href="wiki.html">打開完整 LLM Wiki</a>
+            <a class="text-action" href="workflow.html">查看 Loop／Graph</a>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="deck-footer">
+      <button id="prev-button" type="button" aria-label="上一張投影片">←</button>
+      <div class="slide-progress" aria-label="簡報進度">
+        <span id="slide-counter">01 / 10</span>
+        <div class="progress-track"><span id="progress-bar"></span></div>
+        <span id="evidence-counter">0 / 7 證物</span>
+      </div>
+      <button id="next-button" type="button" aria-label="下一張投影片">→</button>
+    </footer>
+
+    <dialog id="source-dialog" class="source-dialog" aria-labelledby="source-dialog-title">
+      <div class="dialog-head">
+        <div><p class="kicker">SOURCE LINEAGE</p><h2 id="source-dialog-title">本頁證物來源</h2></div>
+        <button id="close-source-dialog" type="button" aria-label="關閉來源視窗">×</button>
+      </div>
+      <div id="source-list" class="source-list"></div>
+      <p class="dialog-note">研究數字只適用於原研究條件。案件 WSI-095 與 95% 為虛構教學情境。</p>
+    </dialog>
+
+    <p class="medical-note">教學展示 · 不提供醫療診斷</p>
+  </body>
+</html>
+

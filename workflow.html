@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071b1f" />
+    <title>Loop／Graph｜AI 病理鑑識局</title>
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="document-page">
+    <header class="document-header">
+      <a class="brand" href="index.html"><span class="brand-seal">鑑</span><span><strong>AI 病理鑑識局</strong><small>WORKFLOW RECORD</small></span></a>
+      <nav><a href="index.html">教學簡報</a><a href="wiki.html">LLM Wiki</a></nav>
+    </header>
+    <main class="document-main">
+      <section class="document-hero">
+        <p class="kicker">LOOP / GRAPH DESIGN</p>
+        <h1>不是一路生成到底，<br />而是在錯誤擴大前回頭。</h1>
+        <p>流程把內容正確性、來源完整性與介面測試分成不同回圈，讓每種問題回到最接近原因的節點。</p>
+      </section>
+      <section class="graph-panel" aria-labelledby="graph-title">
+        <h2 id="graph-title">知識到簡報的 Graph</h2>
+        <div class="graph-flow">
+          <div class="graph-node human"><span>01</span><strong>討論問題</strong><small>先決定初學者要理解什麼</small></div>
+          <i>↓</i>
+          <div class="graph-node"><span>02</span><strong>蒐集＋Ingest</strong><small>7 個可信來源進入 raw 層</small></div>
+          <i>↓</i>
+          <div class="graph-node check"><span>03</span><strong>證物檢查</strong><small>數字＋指標＋資料集＋限制</small></div>
+          <div class="loop-back evidence-loop">不足 → 回到蒐集</div>
+          <i>↓</i>
+          <div class="graph-node"><span>04</span><strong>更新 Wiki</strong><small>交叉連結概念頁</small></div>
+          <i>↓</i>
+          <div class="graph-node"><span>05</span><strong>Query 大綱</strong><small>每句都帶來源 ID</small></div>
+          <div class="loop-back query-loop">無來源 → 回到 Wiki</div>
+          <i>↓</i>
+          <div class="graph-node check"><span>06</span><strong>教學檢查</strong><small>術語、順序、初學者理解</small></div>
+          <div class="loop-back teaching-loop">太難 → 重新改寫</div>
+          <i>↓</i>
+          <div class="graph-node output"><span>07</span><strong>HTML＋QA</strong><small>鍵盤、手機、連結、console</small></div>
+        </div>
+      </section>
+      <section class="loop-cards">
+        <article><span>LOOP A</span><h2>證據完整性</h2><p>來源無法支持數字或因果語氣時，補資料、降低語氣或刪除說法。</p></article>
+        <article><span>LOOP B</span><h2>Wiki 查詢</h2><p>Query 的每個回答都要列出來源 ID。找不到來源便退回概念頁。</p></article>
+        <article><span>LOOP C</span><h2>教學與介面</h2><p>內容錯誤回 Wiki；內容太難回改寫；只有操作失效才回 HTML。</p></article>
+      </section>
+      <section class="reflection-panel">
+        <div><p class="kicker">RUN 01 REFLECTION</p><h2>最常出錯的是「證物卡 → 簡報說法」</h2></div>
+        <div>
+          <p>第一版把研究中的 AUC 0.930 與 0.727 誤寫為 93% 與 72.7% 準確率，並把條件式結果概括成「換醫院一定失準」。</p>
+          <p>因此數字檢查從 HTML 完成後，提前到證物卡生成時。現在每個數字都必須同時保存<strong>指標名稱、資料集與評估情境</strong>，才可進入 Wiki。</p>
+          <a href="wiki.html#records">查看完整執行與 Lint 紀錄 →</a>
+        </div>
+      </section>
+    </main>
+    <footer class="document-footer">教學展示 · 不提供醫療診斷</footer>
+  </body>
+</html>
+
